@@ -1,11 +1,14 @@
-import React from 'react'
+import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import ListFood from './pages/ListFood/ListFood'
 import Sidebar from './components/Sidebar/Sidebar'
 import Menubar from './components/Menubar/Menubar'
+import AddFood from './pages/AddFood/AddFood'
+import Orders from './pages/Orders/Orders'
+import {ToastContainer} from 'react-toastify';
 
 const App = () => {
-    const [sidebarVisible, setSidebarVisible] = React.useState(true);
+    const [sidebarVisible, setSidebarVisible] = useState(true);
 
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
@@ -13,10 +16,12 @@ const App = () => {
 
   return (
     <div className="d-flex" id="wrapper">
-            <Sidebar setSidebarVisible={sidebarVisible}/>
+         
+            <Sidebar sidebarVisible={sidebarVisible}/>
 
             <div id="page-content-wrapper">
-                <Menubar toggleSidebar={toggleSidebar}/>
+                <Menubar toggleSidebar={toggleSidebar} />
+                <ToastContainer />
 
                 <div className="container-fluid">
                     <Routes>

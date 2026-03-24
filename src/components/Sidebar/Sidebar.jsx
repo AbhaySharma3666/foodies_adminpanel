@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../../assets/assets";
 
-const Sidebar = ({SidebarVisible}) => {
+const Sidebar = ({sidebarVisible}) => {
   return (
-    <div className={`border-end bg-white ${SidebarVisible ? '' : 'd-none'}`} id="sidebar-wrapper">
-      <div className="sidebar-heading border-bottom bg-light">
-        <img src={assets.logo} alt="Logo" height={32} width={32}/>
+    <div className={`border-end bg-white ${sidebarVisible ? '' : 'd-none'}`} id="sidebar-wrapper">
+      <div className="sidebar-heading border-bottom p-2 bg-light">
+        <img src={assets.logo} alt="Logo" height={38} width={65}/>
       </div>
       <div className="list-group list-group-flush">
         <Link
