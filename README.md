@@ -1,16 +1,99 @@
-# React + Vite
+# 🍔 Foodies Admin Panel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Admin dashboard for the **Foodies** food delivery platform. Built with **React + Vite**, this panel allows administrators to manage food items and track customer orders.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Add Food** — Upload food items with name, description, category, price, and image
+- **List Food** — View all food items in a table with delete capability
+- **Orders** — Monitor and update order statuses (Preparing → On the way → Delivered)
+- **Responsive Sidebar** — Collapsible navigation sidebar
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Technology | Purpose |
+| --- | --- |
+| [React 19](https://react.dev/) | UI framework |
+| [Vite 7](https://vite.dev/) | Build tool & dev server |
+| [Bootstrap 5](https://getbootstrap.com/) | CSS framework & components |
+| [Bootstrap Icons](https://icons.getbootstrap.com/) | Icon library |
+| [Axios](https://axios-http.com/) | HTTP client |
+| [React Router v7](https://reactrouter.com/) | Client-side routing |
+| [React Toastify](https://fkhadra.github.io/react-toastify/) | Toast notifications |
 
-## Expanding the ESLint configuration
+## 📁 Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+foodies_adminpanel/
+├── public/
+├── src/
+│   ├── assets/          # Static assets (images, logos)
+│   ├── components/
+│   │   ├── Menubar/     # Top navigation bar
+│   │   └── Sidebar/     # Collapsible sidebar navigation
+│   ├── config/
+│   │   └── api.js       # Centralized Axios instance
+│   ├── pages/
+│   │   ├── AddFood/     # Add food form page
+│   │   ├── ListFood/    # Food listing table page
+│   │   └── Orders/      # Orders management page
+│   ├── services/
+│   │   ├── foodService.js   # Food CRUD API calls
+│   │   └── orderService.js  # Order API calls
+│   ├── App.jsx          # Root component with routing
+│   ├── main.jsx         # Application entry point
+│   └── index.css        # Global styles
+├── .env                 # Environment variables (not committed)
+├── .env.example         # Environment variable template
+├── index.html           # HTML entry point
+├── vite.config.js       # Vite configuration
+└── package.json
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** v18+ and **npm** v9+
+- Backend API server running (default: `http://localhost:8080`)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd foodies_adminpanel
+
+# Install dependencies
+npm install
+
+# Create environment file from template
+cp .env.example .env
+
+# Start the dev server
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+### Environment Variables
+
+| Variable | Description | Default |
+| --- | --- | --- |
+| `VITE_API_BASE_URL` | Backend API base URL | `http://localhost:8080/api` |
+
+> Configure the API base URL in the `.env` file. See `.env.example` for the template.
+
+### Available Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start development server with HMR |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint checks |
+
+## 🔗 Related Projects
+
+- **Foodies** — Customer-facing frontend
+- **Foodies API** — Spring Boot backend REST API

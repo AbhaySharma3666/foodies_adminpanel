@@ -1,47 +1,55 @@
-
-import {assets} from "../../assets/assets";
-import { useState } from "react";
-import axios from "axios";
+import { assets } from "../../assets/assets";
+import { useCallback, useState } from "react";
 import { addFood } from "../../services/foodService";
 import { toast } from "react-toastify";
 
+const INITIAL_FORM_STATE = {
+  name: "",
+  description: "",
+  price: "",
+  category: "",
+};
+
+const CATEGORIES = [
+  "Biryani",
+  "Cake",
+  "Burger",
+  "Pizza",
+  "Rolls",
+  "Salad",
+  "Dessert",
+  "Ice Cream",
+  "Drinks",
+];
+
 const AddFood = () => {
-  const [image, setImage] = useState(false);
-  const [data, setData] = useState({
-    name : "",
-    description : "",
-    price : "",
-    category : ""
-  });
+  const [image, setImage] = useState(null);
+  const [data, setData] = useState(INITIAL_FORM_STATE);
 
-  const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setData(data => ({...data, [name] : value}));
-  };
+  const onChangeHandler = useCallback((event) => {
+    const { name, value } = event.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-    if (!image) {
-      toast.error("Please select an image");
-      return;
-    }
+  const onSubmitHandler = useCallback(
+    async (event) => {
+      event.preventDefault();
+      if (!image) {
+        toast.error("Please select an image");
+        return;
+      }
 
-    try {
-      await addFood(data, image);
-      toast.success("Food added successfully");
-      setData({
-        name : "",
-        description : "",
-        price : "",
-        category : ""
-      });
-      setImage(null);
-    } catch (error) {
-      toast.error("Failed to add food");
-    }
-
-  };
+      try {
+        await addFood(data, image);
+        toast.success("Food added successfully");
+        setData(INITIAL_FORM_STATE);
+        setImage(null);
+      } catch (error) {
+        toast.error("Failed to add food");
+      }
+    },
+    [data, image]
+  );
 
   return (
     <div className="mx-2 mt-2">
@@ -52,7 +60,11 @@ const AddFood = () => {
             <form onSubmit={onSubmitHandler}>
               <div className="mb-3">
                 <label htmlFor="image" className="form-label">
-                  <img src={image ? URL.createObjectURL(image) : assets.upload} alt="" width={98}/>
+                  <img
+                    src={image ? URL.createObjectURL(image) : assets.upload}
+                    alt="Upload preview"
+                    width={98}
+                  />
                 </label>
                 <input
                   type="file"
@@ -100,17 +112,19 @@ const AddFood = () => {
                 <label htmlFor="category" className="form-label">
                   Category
                 </label>
-                <select name="category" id="category" className="form-control" onChange={onChangeHandler} value={data.category}>
-                  <option value="Biryani">Biryani</option>
-                  <option value="Cake">Cake</option>
-                  <option value="Burger">Burger</option>
-                  <option value="Pizza">Pizza</option>
-                  <option value="Rolls">Rolls</option>
-                  <option value="Salad">Salad</option>
-                  <option value="Dessert">Dessert</option>
-                  <option value="Ice Cream">Ice Cream</option>
-                  <option value="Drinks">Drinks</option>
+                <select
+                  name="category"
+                  id="category"
+                  className="form-control"
+                  onChange={onChangeHandler}
+                  value={data.category}
+                >
                   <option value="">Select a category</option>
+                  {CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -120,7 +134,7 @@ const AddFood = () => {
                 </label>
                 <input
                   type="number"
-                  placeholder= '&#8377;200'
+                  placeholder="&#8377;200"
                   className="form-control"
                   id="price"
                   required

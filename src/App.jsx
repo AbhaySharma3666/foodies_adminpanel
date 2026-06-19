@@ -1,39 +1,38 @@
-import { useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import ListFood from './pages/ListFood/ListFood'
-import Sidebar from './components/Sidebar/Sidebar'
-import Menubar from './components/Menubar/Menubar'
-import AddFood from './pages/AddFood/AddFood'
-import Orders from './pages/Orders/Orders'
-import {ToastContainer} from 'react-toastify';
+import { useCallback, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import ListFood from "./pages/ListFood/ListFood";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Menubar from "./components/Menubar/Menubar";
+import AddFood from "./pages/AddFood/AddFood";
+import Orders from "./pages/Orders/Orders";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
-    const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
-    const toggleSidebar = () => {
-        setSidebarVisible(!sidebarVisible);
-    }
+  const toggleSidebar = useCallback(() => {
+    setSidebarVisible((prev) => !prev);
+  }, []);
 
   return (
     <div className="d-flex" id="wrapper">
-         
-            <Sidebar sidebarVisible={sidebarVisible}/>
+      <Sidebar sidebarVisible={sidebarVisible} />
 
-            <div id="page-content-wrapper">
-                <Menubar toggleSidebar={toggleSidebar} />
-                <ToastContainer />
+      <div id="page-content-wrapper">
+        <Menubar toggleSidebar={toggleSidebar} />
+        <ToastContainer />
 
-                <div className="container-fluid">
-                    <Routes>
-                        <Route path='/add' element={<AddFood />} />
-                        <Route path='/list' element={<ListFood />} />
-                        <Route path='/orders' element={<Orders />} />
-                        <Route path='/' element={<ListFood />} />
-                    </Routes>
-                </div>
-            </div>
+        <div className="container-fluid">
+          <Routes>
+            <Route path="/add" element={<AddFood />} />
+            <Route path="/list" element={<ListFood />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/" element={<ListFood />} />
+          </Routes>
         </div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default App
+export default App;
