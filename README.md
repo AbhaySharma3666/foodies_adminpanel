@@ -2,6 +2,17 @@
 
 Admin dashboard for the **Foodies** food delivery platform. Built with **React + Vite**, this panel allows administrators to manage food items and track customer orders.
 
+## 🌐 Live Demo
+
+| Service | URL |
+| --- | --- |
+| **Admin Panel** | [foodies-adminpanel.vercel.app](https://foodies-adminpanel.vercel.app) |
+| **Customer Panel** | [foodies-panel.vercel.app](https://foodies-panel.vercel.app) |
+| **Backend API** | [foodies-api-0d6g.onrender.com](https://foodies-api-0d6g.onrender.com/api/health) |
+
+> [!NOTE]
+> The backend is hosted on Render's free tier and may take 30–60 seconds to wake up on the first request.
+
 ## ✨ Features
 
 - **Add Food** — Upload food items with name, description, category, price, and image
